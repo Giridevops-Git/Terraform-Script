@@ -14,6 +14,9 @@ resource "aws_subnet" "Frist-subnet" {
     "name" = "1-subnet"
   }
   
+  depends_on = [
+    aws_vpc.my_testvpc
+  ]
 }
 
 resource "aws_subnet" "Second-subnet" {
@@ -22,7 +25,9 @@ resource "aws_subnet" "Second-subnet" {
   tags = {
     "name" = "2-subnet"
   }
-  
+  depends_on = [
+    aws_subnet.Frist-subnet
+  ]
 }
 
 resource "aws_subnet" "Thread-subnet" {
@@ -31,5 +36,7 @@ resource "aws_subnet" "Thread-subnet" {
   tags = {
     "name" = "3-subnet"
   }
-  
+  depends_on = [
+    aws_subnet.Second-subnet
+  ]
 }
